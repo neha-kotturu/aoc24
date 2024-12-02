@@ -1,16 +1,15 @@
-def safeLevelsDampen(data):
-    levels = [[int(num) for num in row.split()] for row in data.strip().split('\n')]
-    
-    safe = 0
-    for i in levels:
-        def isSafe(level):
+def isSafe(level):
             inc = level[0] - level[1]
             for j in range(len(level)-1):
                 diff = level[j] - level[j+1]
                 if (inc < 0 and diff > 0) or (inc > 0 and diff < 0) or abs(diff) < 1 or abs(diff) > 3:
                     return False
             return True
-        
+
+def safeLevelsDampen(data):
+    levels = [[int(num) for num in row.split()] for row in data.strip().split('\n')]
+    safe = 0
+    for i in levels:
         if isSafe(i):
             safe += 1
         else:
@@ -19,7 +18,6 @@ def safeLevelsDampen(data):
                 if isSafe(dampenedLevel):
                     safe += 1
                     break
-    
     return safe
 
 
